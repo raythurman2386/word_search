@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  word-search:
+    build: .
+    container_name: word-search-generator
+    ports:
+      - "8123:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./downloads:/app/downloads
+    restart: unless-stopped
+    environment:
+      - MAX_UPLOAD_SIZE=5242880  # 5MB in bytes
+      - CLEANUP_INTERVAL_HOURS=24
+      - LOG_LEVEL=INFO
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 1m
+      timeout: 10s
+      retries: 3

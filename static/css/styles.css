@@ -1,0 +1,51 @@
+/* Word Search Generator CSS */
+
+/* HTMX indicator styles */
+.htmx-indicator {
+    display: none;
+}
+.htmx-request .htmx-indicator {
+    display: inline-block;
+}
+.htmx-request.htmx-indicator {
+    display: inline-block;
+}
+
+/* Custom styles */
+body {
+    background-color: #f8f9fa;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+/* Add some animation to the download buttons */
+.btn-success, .btn-outline-primary {
+    transition: transform 0.2s ease;
+}
+
+.btn-success:hover, .btn-outline-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* Custom focus styles */
+.form-control:focus, .form-range:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Footer styling */
+footer {
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

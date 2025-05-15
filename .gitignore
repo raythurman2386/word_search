@@ -1,0 +1,70 @@
+# Project-Specific Ignores
+*.pdf
+*.txt
+*.zip
+
+# Word Search Project Specific
+uploads/*
+!uploads/.gitkeep
+downloads/*
+!downloads/.gitkeep
+
+# Python Ignores
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual Environments
+venv/
+env/
+.env/
+.venv/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs
+*.log
+
+# Docker
+.docker/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Temporary Files
+*.tmp
+*.bak
+
+# Secrets and Credentials
+.env
+*.pem
+*.key
+
+# Dependency Directories
+node_modules/
+jspm_packages/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Miscellaneous
+.cache/
+.mypy_cache/
+.pylint.d/

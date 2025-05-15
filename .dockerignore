@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+env/
+.env
+
+# Temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+*.log
+
+# Local development
+.git
+.gitignore
+
+# User-generated content (these will be mounted as volumes)
+uploads/*
+downloads/*
+!uploads/.gitkeep
+!downloads/.gitkeep
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
