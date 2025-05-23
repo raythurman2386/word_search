@@ -35,18 +35,34 @@ def generate_pdf_for_file(word_file_path, grid_size=15):
         
         print(f"Generating word search for {base_name}...", end="", flush=True)
         
-        # Run the word search generator
-        result = subprocess.run([
-            sys.executable, 
-            "app/word_search.py",
-            str(word_file_path),
-            "-o", str(output_pdf),
-            "-s", str(grid_size)
-        ], capture_output=True, text=True)
+        # Get the absolute path to word_search.py
+        script_dir = Path(__file__).parent
+        word_search_script = script_dir / "word_search.py"
         
-        if result.returncode != 0:
-            print(f" [FAILED]")
-            return (False, f"Error processing {base_name}: {result.stderr}")
+        # Ensure the script exists
+        if not word_search_script.exists():
+            return (False, f"Word search script not found at {word_search_script}")
+        
+        # Ensure output directory exists
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        try:
+            # Run the word search generator
+            result = subprocess.run([
+                sys.executable, 
+                str(word_search_script),
+                str(word_file_path),
+                "-o", str(output_pdf),
+                "-s", str(grid_size)
+            ], capture_output=True, text=True, cwd=script_dir.parent)  # Run from project root
+            
+            if result.returncode != 0:
+                print(f" [FAILED]")
+                return (False, f"Error processing {base_name}: {result.stderr}")
+                
+        except Exception as e:
+            print(f" [EXCEPTION]")
+            return (False, f"Exception processing {base_name}: {str(e)}")
         
         solved_pdf = Path(str(output_pdf).replace('.pdf', '_solved.pdf'))
         if not output_pdf.exists() or not solved_pdf.exists():

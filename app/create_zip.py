@@ -1,10 +1,19 @@
 """
 Create a zip archive of all word search PDFs for easy sharing.
+Organizes files with non-solved PDFs first, followed by their solved versions.
 """
 
 import datetime
 import zipfile
 from pathlib import Path
+
+
+def get_sort_key(file_path):
+    """Return a sort key that ensures non-solved files come before solved ones."""
+    filename = file_path.stem
+    is_solved = filename.endswith('_solved')
+    base_name = filename.replace('_solved', '') if is_solved else filename
+    return (base_name, is_solved)  # This ensures non-solved comes before solved
 
 
 def main():
@@ -18,13 +27,13 @@ def main():
 
     exclude_files = [".gitkeep"]
 
-    pdf_files = []
-    total_size = 0
-
-    for file in downloads_dir.glob("*.pdf"):
-        if file.name not in exclude_files:
-            pdf_files.append(file)
-            total_size += file.stat().st_size
+    # Get all PDF files and sort them with non-solved first, then solved
+    pdf_files = sorted(
+        [f for f in downloads_dir.glob("*.pdf") if f.name not in exclude_files],
+        key=get_sort_key
+    )
+    
+    total_size = sum(f.stat().st_size for f in pdf_files)
 
     total_size_mb = total_size / (1024 * 1024)
 
